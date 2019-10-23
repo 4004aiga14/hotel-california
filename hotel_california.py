@@ -102,10 +102,8 @@ class Hotel:
         total = 0
         lengthOfStay = self.rooms[room].getOccupier().getLengthOfStay()
         numInGroup = self.rooms[room].getOccupier().getNumInGroup()
-        if self.rooms[room].hasSeaView():
-            total += lengthOfStay * self.SEAVIEW_SUPPLEMENT
-        if numInGroup == 1:
-            total += lengthOfStay * self.SINGLE_OCCUPIER_SUPPLEMENT
+        total += (0,lengthOfStay * self.SEAVIEW_SUPPLEMENT)[self.rooms[room].hasSeaView()]
+        total += (0,lengthOfStay * self.SINGLE_OCCUPIER_SUPPLEMENT)[numInGroup == 1]
         total += lengthOfStay * self.ROOM_PRICE * numInGroup
         total += self.rooms[room].getOccupier().getNumDinners() * self.DINNER_PRICE
         return total
